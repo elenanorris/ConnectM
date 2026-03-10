@@ -11,6 +11,7 @@
 
 import random
 import sys
+import a_b_search
 
 from UI import UI
 from entities import Map
@@ -52,8 +53,9 @@ def parse_args(argv):
     return board_size, connect_count, human_first
 
 # Placeholder for the computer's move selection logic. This will eventually use the alpha-beta search algorithm to choose the best move.
-def choose_computer_move(board):
-    return random.choice(board.available_columns())
+def choose_computer_move(board, connect_count):
+    _, move = a_b_search(board, 4, -9999, 9999, False, connect_count)
+    return move
 
 
 def run_game(board_size, connect_count, human_first):
@@ -77,7 +79,7 @@ def run_game(board_size, connect_count, human_first):
                 print("Game ended by player.")
                 return 0
         else:
-            column = choose_computer_move(board)
+            column = choose_computer_move(board, connect_count)
             print("Computer chooses column {}".format(column + 1))
 
         try:
