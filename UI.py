@@ -42,13 +42,13 @@ def print_board(board):
             state = board.grid[row][col].state
             if state == 1:
                 symbol = "X"
-            elif state == -1:
+            elif state == 2:
                 symbol = "O"
             else:
                 symbol = " "
-            print(f"| {symbol} ", endl="")
+            print(f"| {symbol} ", end="")
         print("|")
     print("+---" * width + "+")
     for i in range(width):
-        print(f"  {i} ", end="")
+        print(f"  {i+1} ", end="")
     print("\n")
