@@ -2,7 +2,7 @@
 # This file contains the main game loop and argument parsing.
 # Usage:
 #     python connectM.py N M H
-
+#
 # Arguments:
 #    N: board size (NxN)
 #    M: contiguous token count needed to win
@@ -11,7 +11,7 @@
 
 import random
 import sys
-import a_b_search
+from algorithms import a_b_search
 
 from UI import UI
 from entities import Map
@@ -23,7 +23,7 @@ def print_usage():
     print("  M: contiguous count to win, integer in [1, N]")
     print("  H: first player flag (1 = human, 0 = computer)")
 
-
+# Validate incoming arguments.
 def parse_args(argv):
     if len(argv) != 3:
         print_usage()
@@ -52,12 +52,12 @@ def parse_args(argv):
 
     return board_size, connect_count, human_first
 
-# Placeholder for the computer's move selection logic. This will eventually use the alpha-beta search algorithm to choose the best move.
+# Entrypoint for the alpha-beta search to choose the computer's move.
 def choose_computer_move(board, connect_count):
     _, move = a_b_search(board, 4, -9999, 9999, False, connect_count)
     return move
 
-
+# Main game loop.
 def run_game(board_size, connect_count, human_first):
     ui = UI()
     board = Map(board_size)

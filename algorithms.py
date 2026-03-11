@@ -1,8 +1,6 @@
 import math
 import copy
 def a_b_search(board, depth, alpha, beta, maximizing, connect):
-    # Placeholder for the alpha-beta search algorithm implementation.
-    # This function will evaluate the game state and return the best move for the current player (turn).
     if depth == 0 or board.is_full():
         return evaluate(board), None
     if board.has_connect(1, connect):
@@ -23,6 +21,21 @@ def a_b_search(board, depth, alpha, beta, maximizing, connect):
                 value = new_score
                 best_move = c
             alpha = max(alpha, value)
+            if alpha >= beta:
+                break
+        return value, best_move
+    else:
+        value = math.inf
+        best_move = valid[0]
+
+        for c in valid:
+            new_board = copy.deepcopy(board)
+            new_board.drop_token(c, 2)
+            new_score, _ = a_b_search(new_board, depth - 1, alpha, beta, True, connect)
+            if new_score < value:
+                value = new_score
+                best_move = c
+            beta = min(beta, value)
             if alpha >= beta:
                 break
         return value, best_move
