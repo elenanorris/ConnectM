@@ -51,7 +51,7 @@ def parse_args(argv):
 
     return board_size, connect_count, human_first
 
-# Placeholder for the computer's move selection logic. This will eventually use the alpha-beta search algorithm to choose the best move.
+# Placeholder for the computer's move selection logic.
 def choose_computer_move(board):
     return random.choice(board.available_columns())
 
